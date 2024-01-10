@@ -4,4 +4,5 @@
     <string name="movie_release_year_hint">Release Year</string>
     <string name="add_movie_button">Add Movie</string>
     <string name="movie_poster_content_description">Movie\'s poster</string>
+    <string name="movie_type_hint">Movie type</string>
 </resources>
