@@ -56,8 +56,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/movie_type_hint"
             android:textAppearance="?attr/textAppearanceLabelSmall"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/search_movie_poster"
             app:layout_constraintTop_toBottomOf="@+id/search_movie_year" />

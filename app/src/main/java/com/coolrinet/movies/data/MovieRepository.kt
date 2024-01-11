@@ -12,4 +12,6 @@ interface MovieRepository {
     suspend fun addMovie(movie: Movie)
 
     suspend fun searchMovies(query: String): List<MovieSearchItem>
+
+    suspend fun getMovieByTitle(title: String): MovieSearchItem
 }

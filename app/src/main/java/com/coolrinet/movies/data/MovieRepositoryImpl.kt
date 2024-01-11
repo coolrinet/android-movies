@@ -20,4 +20,7 @@ class MovieRepositoryImpl(
 
     override suspend fun searchMovies(query: String) =
         omdbApi.searchMovies(query).searchResults
+
+    override suspend fun getMovieByTitle(title: String) =
+        omdbApi.getMovieByTitle(title)
 }

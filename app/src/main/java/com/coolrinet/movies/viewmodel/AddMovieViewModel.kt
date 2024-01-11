@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel(assistedFactory = AddMovieViewModelFactory::class)
 class AddMovieViewModel @AssistedInject constructor(
     private val movieRepository: MovieRepository,
-    @Assisted private val selectedMovie: Movie? = null,
+    @Assisted private val movieTitle: String? = null,
 ) : ViewModel() {
     private val _movie: MutableStateFlow<Movie> = MutableStateFlow(
         Movie(title = "", year = "")
@@ -25,8 +25,17 @@ class AddMovieViewModel @AssistedInject constructor(
     val movie: StateFlow<Movie> = _movie.asStateFlow()
 
     init {
-        if (selectedMovie != null) {
-            _movie.value = selectedMovie
+        if (movieTitle != null) {
+            viewModelScope.launch {
+                val selectedMovie = movieRepository.getMovieByTitle(movieTitle)
+                updateMovie { movie ->
+                    movie.copy(
+                        title = selectedMovie.title,
+                        year = selectedMovie.year,
+                        posterUrl = selectedMovie.poster
+                    )
+                }
+            }
         }
     }
 
@@ -45,5 +54,5 @@ class AddMovieViewModel @AssistedInject constructor(
 
 @AssistedFactory
 interface AddMovieViewModelFactory {
-    fun create(selectedMovie: Movie? = null): AddMovieViewModel
+    fun create(selectedMovie: String? = null): AddMovieViewModel
 }

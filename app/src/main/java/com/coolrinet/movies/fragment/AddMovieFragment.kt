@@ -8,14 +8,21 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import coil.load
 import com.coolrinet.movies.R
+import com.coolrinet.movies.data.database.Movie
 import com.coolrinet.movies.databinding.FragmentAddMovieBinding
 import com.coolrinet.movies.viewmodel.AddMovieViewModel
 import com.coolrinet.movies.viewmodel.AddMovieViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.withCreationCallback
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AddMovieFragment : Fragment() {
@@ -25,10 +32,12 @@ class AddMovieFragment : Fragment() {
             "Cannot access binding because it is null. Is the view visible?"
         }
 
+    private val args: AddMovieFragmentArgs by navArgs()
+
     private val viewModel: AddMovieViewModel by viewModels(
         extrasProducer = {
             defaultViewModelCreationExtras.withCreationCallback<AddMovieViewModelFactory> { factory ->
-                factory.create()
+                factory.create(args.movieTitle)
             }
         }
     )
@@ -83,12 +92,20 @@ class AddMovieFragment : Fragment() {
                 }
 
                 viewModel.addMovie(viewModel.movie.value)
+//                findNavController().popBackStack()
                 Snackbar.make(
                     view,
                     R.string.add_movie_success_message,
                     Snackbar.LENGTH_SHORT
                 ).show()
-                findNavController().popBackStack()
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.movie.collect {
+                    updateUi(it)
+                }
             }
         }
     }
@@ -102,5 +119,28 @@ class AddMovieFragment : Fragment() {
         findNavController().navigate(
             AddMovieFragmentDirections.searchMovies(searchQuery)
         )
+    }
+
+    private fun updateUi(movie: Movie) {
+        binding.apply {
+            if (movieTitleTextInputLayout.editText?.text.toString() != movie.title) {
+                movieTitleTextInputLayout.editText?.setText(movie.title)
+            }
+
+            if (movieReleaseYearTextInputLayout.editText?.text.toString() != movie.year) {
+                movieReleaseYearTextInputLayout.editText?.setText(movie.year)
+            }
+
+            if (movie.posterUrl == null) {
+                moviePosterImage.visibility = View.GONE
+            } else {
+                moviePosterImage.apply {
+                    visibility = View.VISIBLE
+                    load(movie.posterUrl) {
+                        placeholder(R.drawable.movie_poster_placeholder)
+                    }
+                }
+            }
+        }
     }
 }

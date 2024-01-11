@@ -22,6 +22,10 @@ class MovieSearchItemHolder(
         binding.searchMoviePoster.load(movieSearchItem.poster) {
             placeholder(R.drawable.movie_poster_placeholder)
         }
+
+        binding.root.setOnClickListener {
+            onMovieClicked(movieSearchItem)
+        }
     }
 }
 

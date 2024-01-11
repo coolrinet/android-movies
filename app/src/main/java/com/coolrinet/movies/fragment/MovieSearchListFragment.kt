@@ -57,9 +57,9 @@ class MovieSearchListFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.movieSearchList.collect {
                     binding.movieSearchListRecyclerView.adapter =
-                        MovieSearchListAdapter(it) { _ ->
+                        MovieSearchListAdapter(it) { movie ->
                             findNavController().navigate(
-                                MovieSearchListFragmentDirections.addSelectedMovieToWatch()
+                                MovieSearchListFragmentDirections.addSelectedMovieToWatch(movie.title)
                             )
                         }
                 }
