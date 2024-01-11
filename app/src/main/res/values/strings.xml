@@ -7,4 +7,5 @@
     <string name="movie_type_hint">Movie type</string>
     <string name="add_movie_blank_title_message">The title of movie cannot be blank</string>
     <string name="add_movie_success_message">Movie was added</string>
+    <string name="add_movie_to_watch_content_description">Add movie to watch</string>
 </resources>
