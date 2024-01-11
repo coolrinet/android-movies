@@ -20,7 +20,9 @@ class MovieListViewModel @Inject constructor(
     )
     val movies: StateFlow<List<Movie>> = _movies.asStateFlow()
 
-    private val moviesToDelete: MutableList<Movie> = mutableListOf()
+    private val _moviesToDelete: MutableList<Movie> = mutableListOf()
+    val moviesToDelete: List<Movie>
+        get() = _moviesToDelete.toList()
 
     init {
         viewModelScope.launch {
@@ -31,10 +33,10 @@ class MovieListViewModel @Inject constructor(
     }
 
     fun changeMovieDeletionStatus(movie: Movie) {
-        if (movie in moviesToDelete) {
-            moviesToDelete.remove(movie)
+        if (movie in _moviesToDelete) {
+            _moviesToDelete.remove(movie)
         } else {
-            moviesToDelete.add(movie)
+            _moviesToDelete.add(movie)
         }
     }
 

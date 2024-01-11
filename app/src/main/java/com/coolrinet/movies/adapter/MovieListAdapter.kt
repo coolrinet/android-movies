@@ -21,8 +21,10 @@ class MovieHolder(
             }
         }
 
-        binding.root.setOnCheckedChangeListener { card, isChecked ->
-            card.isChecked = isChecked
+        binding.root.setOnClickListener {
+            val cardCheckbox = binding.movieIsSelectedCheckbox
+
+            cardCheckbox.isChecked = !cardCheckbox.isChecked
             onMovieClicked(movie)
         }
     }
