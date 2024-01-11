@@ -38,9 +38,9 @@ class MovieListViewModel @Inject constructor(
         }
     }
 
-    fun deleteMovies(vararg movies: Movie) {
+    fun deleteMovies() {
         viewModelScope.launch {
-            movieRepository.deleteMovies(*movies)
+            movieRepository.deleteMovies(*moviesToDelete.toTypedArray())
         }
     }
 }

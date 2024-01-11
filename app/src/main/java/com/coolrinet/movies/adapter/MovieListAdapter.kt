@@ -11,7 +11,7 @@ import com.coolrinet.movies.databinding.ListItemMovieBinding
 class MovieHolder(
     private val binding: ListItemMovieBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(movie: Movie) {
+    fun bind(movie: Movie, onMovieClicked: (Movie) -> Unit) {
         binding.movieTitle.text = movie.title
         binding.movieYear.text = movie.year
 
@@ -21,14 +21,16 @@ class MovieHolder(
             }
         }
 
-        binding.root.setOnCheckedChangeListener { _, isChecked ->
-            binding.movieIsSelectedCheckbox.isChecked = isChecked
+        binding.root.setOnCheckedChangeListener { card, isChecked ->
+            card.isChecked = isChecked
+            onMovieClicked(movie)
         }
     }
 }
 
 class MovieListAdapter(
     private val movies: List<Movie>,
+    private val onMovieClicked: (Movie) -> Unit,
 ) : RecyclerView.Adapter<MovieHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,7 +40,8 @@ class MovieListAdapter(
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         val item = movies[position]
-        holder.bind(item)
+
+        holder.bind(item, onMovieClicked)
     }
 
     override fun getItemCount() = movies.size

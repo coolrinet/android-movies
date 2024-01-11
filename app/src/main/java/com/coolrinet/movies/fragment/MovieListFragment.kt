@@ -53,7 +53,9 @@ class MovieListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.movies.collect { movies ->
-                    binding.movieRecyclerView.adapter = MovieListAdapter(movies)
+                    binding.movieRecyclerView.adapter = MovieListAdapter(movies) { movie ->
+                        viewModel.changeMovieDeletionStatus(movie)
+                    }
                 }
             }
         }
