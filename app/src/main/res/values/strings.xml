@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Movies</string>
+    <string name="app_name">Movies To Watch</string>
+    <string name="add_movie_toolbar_title">Add movie</string>
+    <string name="movie_search_toolbar_title">Search Results</string>
     <string name="movie_title_hint">Movie Title</string>
     <string name="movie_release_year_hint">Release Year</string>
     <string name="add_movie_button">Add Movie</string>
