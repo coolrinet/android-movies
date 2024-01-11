@@ -16,4 +16,5 @@
     <string name="movie_list_empty_image_content_description">Image of empty movie list</string>
     <string name="movie_list_empty_message">There are currently no movies in your watch list</string>
     <string name="movie_list_empty_add_message">Tap the button below to get started!</string>
+    <string name="movie_title_text_input_layout_end_icon_content_description">Search movies by the title</string>
 </resources>

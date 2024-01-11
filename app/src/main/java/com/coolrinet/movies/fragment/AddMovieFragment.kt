@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -60,18 +59,22 @@ class AddMovieFragment : Fragment() {
             getString(R.string.add_movie_toolbar_title)
 
         binding.apply {
-            movieTitleTextInputLayout.editText?.let { editText ->
-                editText.setOnEditorActionListener { v, actionId, _ ->
-                    when (actionId) {
-                        EditorInfo.IME_ACTION_SEARCH -> {
-                            searchMovies(v.text.toString())
-                            true
-                        }
+            movieTitleTextInputLayout.setEndIconOnClickListener {
+                val title = movieTitleTextInputLayout.editText?.text
 
-                        else -> false
-                    }
+                if (title.isNullOrBlank()) {
+                    Snackbar.make(
+                        view,
+                        R.string.add_movie_blank_title_message,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setEndIconOnClickListener
                 }
 
+                searchMovies(title.toString())
+            }
+
+            movieTitleTextInputLayout.editText?.let { editText ->
                 editText.doOnTextChanged { text, _, _, _ ->
                     viewModel.updateMovie { oldMovie ->
                         oldMovie.copy(title = text.toString())
