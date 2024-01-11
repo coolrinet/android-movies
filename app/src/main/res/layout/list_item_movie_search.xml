@@ -18,7 +18,7 @@
             android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/movie_poster_content_description"
-            android:src="@drawable/movie_poster_placeholder"
+            app:srcCompat="@drawable/movie_poster_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

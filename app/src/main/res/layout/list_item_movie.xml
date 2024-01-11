@@ -18,10 +18,10 @@
             android:layout_marginBottom="16dp"
             android:adjustViewBounds="true"
             android:contentDescription="@string/movie_poster_content_description"
-            android:src="@drawable/movie_poster_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/movie_poster_placeholder" />
 
         <TextView
             android:id="@+id/movie_title"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/movie_release_year_hint"

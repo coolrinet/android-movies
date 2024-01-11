@@ -13,4 +13,7 @@
     <string name="delete_selected_movies_menu_item">Delete selected movies</string>
     <string name="delete_movies_success">Movies have been deleted</string>
     <string name="delete_movies_no_selected_items">At least one movie must be selected for deletion</string>
+    <string name="movie_list_empty_image_content_description">Image of empty movie list</string>
+    <string name="movie_list_empty_message">There are currently no movies in your watch list</string>
+    <string name="movie_list_empty_add_message">Tap the button below to get started!</string>
 </resources>

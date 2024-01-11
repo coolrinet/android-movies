@@ -110,6 +110,14 @@ class MovieListFragment : Fragment() {
                         viewModel.changeMovieDeletionStatus(movie)
                     }
                     binding.movieRecyclerView.adapter = movieListAdapter
+                    
+                    if (movies.isEmpty()) {
+                        binding.movieRecyclerView.visibility = View.GONE
+                        binding.moviesToWatchEmptyList.visibility = View.VISIBLE
+                    } else {
+                        binding.movieRecyclerView.visibility = View.VISIBLE
+                        binding.moviesToWatchEmptyList.visibility = View.GONE
+                    }
                 }
             }
         }
