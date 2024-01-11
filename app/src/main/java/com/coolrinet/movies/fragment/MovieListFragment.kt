@@ -1,5 +1,6 @@
 package com.coolrinet.movies.fragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -16,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.coolrinet.movies.R
 import com.coolrinet.movies.adapter.MovieListAdapter
@@ -44,7 +46,13 @@ class MovieListFragment : Fragment() {
     ): View {
         _binding = FragmentMovieListBinding.inflate(inflater, container, false)
 
-        binding.movieRecyclerView.layoutManager = LinearLayoutManager(context)
+        val deviceOrientation = resources.configuration.orientation
+
+        if (deviceOrientation == Configuration.ORIENTATION_PORTRAIT) {
+            binding.movieRecyclerView.layoutManager = LinearLayoutManager(context)
+        } else {
+            binding.movieRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        }
 
         return binding.root
     }
