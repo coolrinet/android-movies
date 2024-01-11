@@ -12,8 +12,7 @@ class MovieSearchInterceptor : Interceptor {
         val originalRequest: Request = chain.request()
 
         val newUrl: HttpUrl = originalRequest.url.newBuilder()
-            .addQueryParameter("api_key", API_KEY)
-            .addQueryParameter("r", "json")
+            .addQueryParameter("apikey", API_KEY)
             .build()
 
         val newRequest: Request = originalRequest.newBuilder()

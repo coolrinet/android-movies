@@ -5,6 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface OmdbApi {
-    @GET
+    @GET(".")
     suspend fun searchMovies(@Query("s") query: String): OmdbResponse
 }

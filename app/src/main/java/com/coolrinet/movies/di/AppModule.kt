@@ -40,14 +40,14 @@ object AppModule {
             .build()
 
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("http://img.omdbapi.com/")
+            .baseUrl("https://www.omdbapi.com/")
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
             .build()
 
         return retrofit.create()
     }
-    
+
     @Provides
     @Singleton
     fun provideMovieRepository(database: MovieDatabase, api: OmdbApi): MovieRepository {

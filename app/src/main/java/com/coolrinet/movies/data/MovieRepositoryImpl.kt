@@ -19,5 +19,5 @@ class MovieRepositoryImpl(
     }
 
     override suspend fun searchMovies(query: String) =
-        omdbApi.searchMovies(query).movies.searchResults
+        omdbApi.searchMovies(query).searchResults
 }
