@@ -92,7 +92,7 @@ class AddMovieFragment : Fragment() {
                 }
 
                 viewModel.addMovie(viewModel.movie.value)
-//                findNavController().popBackStack()
+                findNavController().popBackStack()
                 Snackbar.make(
                     view,
                     R.string.add_movie_success_message,
